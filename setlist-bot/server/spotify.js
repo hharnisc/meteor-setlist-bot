@@ -29,6 +29,10 @@ SpotifyRequest.prototype.getTrackIds = function(artist, tracks) {
 		var params = {
 			'q': artist + ' ' + trackName
 		};
+
+		// FIXME:
+		// Turned off/worked aroudn async web gets in the interest of getting something working for the code jam.
+
 		// HTTP.call('GET', baseUrl, {'params': params}, function(error, result) {
 		// 	console.log(this.trackIds);
 		// 	if (error != null) {
