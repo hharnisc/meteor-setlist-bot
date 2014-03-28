@@ -14,4 +14,10 @@ Meteor.startup(function () {
 		var userId = tweet.user.id;
 		console.log(username + ' - ' + userId + ' - ' + message);
 	});
+
+	var artist = 'Foo Fighters';
+	var setList = setlistGrabber(artist);
+	var r = new SpotifyRequest();
+	var trackIds = r.getTrackIds(artist, setList);
+	console.log(trackIds);
 });
