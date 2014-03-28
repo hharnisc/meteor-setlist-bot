@@ -29,6 +29,7 @@ setlistGrabber = function(artist){
 		}
 		return;
 	} catch (e) {
+		console.log(e);
 		// Got a network error, time-out or HTTP error in the 400 or 500 range.
 		return;
 	}
