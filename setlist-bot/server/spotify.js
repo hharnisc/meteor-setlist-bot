@@ -71,7 +71,33 @@ SpotifyRequest.prototype.getTrackIds = function(artist, tracks) {
 	return results;
 }
 
+SpotifyRequest.prototype.getCoverImage = function(trackId) {
+	var baseUrl = 'https://embed.spotify.com/';
+	var params = {
+		'uri': 'spotify:trackset:CoverFetch:' + trackId
+	};
+	var headers = {
+		'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36'
+	};
+
+	console.log(baseUrl + '?uri=' + params['uri']);
+
+	var result = HTTP.call('GET', baseUrl, {'params': params, 'headers': headers});
+	var html = result.content;
+
+	// Find the cover image using regexes.
+	var coverImageRegex = /data-ca="([^"]+)"/;
+	var coverImage = coverImageRegex.exec(html)[1];
+
+	return coverImage;
+}
+
 // r = new SpotifyRequest();
 // trackIds = r.getTrackIds('Foo Fighters', ['Everlong', "monkey wrench", "best of you"]);
+// trackIds = ['07q6QTQXyPRCf7GbLakRPr'];
+// trackIds.forEach(function(trackId) {
+// 	var coverImage = r.getCoverImage(trackId);
+// 	console.log('coverImage: ' + coverImage);
+// });
 // console.log(trackIds);
 
