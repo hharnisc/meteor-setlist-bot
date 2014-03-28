@@ -1,4 +1,4 @@
-var setlistGrabber = function(artist){
+setlistGrabber = function(artist){
 
 	try {
 		var result = HTTP.get('http://api.setlist.fm/rest/0.1/search/setlists.json?artistName=' + artist);
@@ -33,7 +33,7 @@ var setlistGrabber = function(artist){
 		return;
 	}
 };
-Meteor.startup(function (){ 
-	var artist = 'Cults';
-	console.log(setlistGrabber(artist));
-});
+// Meteor.startup(function (){ 
+// 	var artist = 'Cults';
+// 	console.log(setlistGrabber(artist));
+// });

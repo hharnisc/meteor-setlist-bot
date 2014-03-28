@@ -15,13 +15,10 @@
 // });
 
 
-var SpotifyRequest = function() {
-}
+SpotifyRequest = function() {
+};
 
 SpotifyRequest.prototype.getTrackIds = function(artist, tracks) {
-	console.log(artist);
-	console.log(tracks);
-
 	var trackIds = {};
 
 	tracks.forEach(function(trackName) {
@@ -50,26 +47,26 @@ SpotifyRequest.prototype.getTrackIds = function(artist, tracks) {
 		// 		trackIds[trackName] = shortTrackId;
 		// 	}
 		// });
+
 		var result = HTTP.call('GET', baseUrl, {'params': params});
 		var responseData = JSON.parse(result.content);
-		var fullTrackId = responseData.tracks[0].href;
-		var splitTrackId = fullTrackId.split(':');
-		var shortTrackId = splitTrackId[splitTrackId.length - 1];
-
-		console.log(trackName + ': ' + shortTrackId);
-		trackIds[trackName] = shortTrackId;
+		if (responseData.tracks.length < 1) {
+			trackIds[trackName] = null;
+		} else {
+			var fullTrackId = responseData.tracks[0].href;
+			var splitTrackId = fullTrackId.split(':');
+			var shortTrackId = splitTrackId[splitTrackId.length - 1];
+			trackIds[trackName] = shortTrackId;
+		}
 	});
 
-	// while (trackIds.length < tracks.length) {
-	// }
-
-	results = [];
+	var results = [];
 	tracks.forEach(function(trackName) {
 		results.push(trackIds[trackName]);
 	});
 
 	return results;
-}
+};
 
 // r = new SpotifyRequest();
 // trackIds = r.getTrackIds('Foo Fighters', ['Everlong', "monkey wrench", "best of you"]);
