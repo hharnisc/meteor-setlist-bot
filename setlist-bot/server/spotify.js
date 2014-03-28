@@ -32,6 +32,13 @@ SpotifyRequest.prototype.getTrackIds = function(artist, tracks) {
 
 		// FIXME:
 		// Turned off/worked aroudn async web gets in the interest of getting something working for the code jam.
+		// Maybe a hack solution could be to bail/halt if the number of trackIds is less than the number of tracks.
+
+		// FIXME:
+		// The below code does NO error handling
+
+		// Fixme:
+		// The below code crashes if there are no results for the query in question.
 
 		// HTTP.call('GET', baseUrl, {'params': params}, function(error, result) {
 		// 	console.log(this.trackIds);
